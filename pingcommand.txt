@@ -1,0 +1,89 @@
+package tstproj;
+
+import java.awt.EventQueue;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+import javax.swing.JFrame;
+
+public class PingCommand {
+
+	private JFrame frame;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					
+					PingCommand window = new PingCommand();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				
+				String ip = "192.168.0.1"; //Any IP Address on your network / Web
+			    runSystemCommand("ping " + ip);
+				
+			}
+		});
+	}
+	
+	public static void runSystemCommand(String command) {
+
+	    try {
+	        Process p = Runtime.getRuntime().exec(command);
+	        BufferedReader inputStream = new BufferedReader(
+	                new InputStreamReader(p.getInputStream()));
+
+	        String s = "";
+	        // reading output stream of the command
+	        while ((s = inputStream.readLine()) != null) {
+	            //System.out.println(s);
+	            
+	            
+	            if (s.contains("  Minimum = 1ms")) {
+                    
+	            	
+	            	System.out.println("fine");
+	            	
+                }else {
+                	
+                	System.out.println("not working");
+                }
+	            
+	            
+	            
+	            
+	            
+	            
+	        }
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
+
+	
+	
+
+	/**
+	 * Create the application.
+	 */
+	public PingCommand() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+
+}
